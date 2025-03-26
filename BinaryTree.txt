@@ -1,0 +1,61 @@
+// 파일 이름은 Main.java
+import java.util.*;
+
+public class Main {
+    static class Node {
+        char left, right;
+        Node(char left, char right) {
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    static Map<Character, Node> tree = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < n; i++) {
+            String[] input = sc.nextLine().split(" ");
+            char root = input[0].charAt(0);
+            char left = input[1].charAt(0);
+            char right = input[2].charAt(0);
+            tree.put(root, new Node(left, right));
+        }
+
+        StringBuilder pre = new StringBuilder();
+        StringBuilder in = new StringBuilder();
+        StringBuilder post = new StringBuilder();
+
+        preorder('A', pre);
+        inorder('A', in);
+        postorder('A', post);
+
+        System.out.println(pre.toString());
+        System.out.println(in.toString());
+        System.out.println(post.toString());
+    }
+
+    static void preorder(char current, StringBuilder sb) {
+        if (current == '.') return;
+        sb.append(current);
+        preorder(tree.get(current).left, sb);
+        preorder(tree.get(current).right, sb);
+    }
+
+    static void inorder(char current, StringBuilder sb) {
+        if (current == '.') return;
+        inorder(tree.get(current).left, sb);
+        sb.append(current);
+        inorder(tree.get(current).right, sb);
+    }
+
+    static void postorder(char current, StringBuilder sb) {
+        if (current == '.') return;
+        postorder(tree.get(current).left, sb);
+        postorder(tree.get(current).right, sb);
+        sb.append(current);
+    }
+}
