@@ -19,4 +19,16 @@
 
 ## 💻 실행 예시
 
-입력:
+입력:7
+A B C
+B D .
+C E F
+E . .
+F . G
+D . .
+G . .
+
+출력:
+ABDCEFG
+DBAECFG
+DBEGFCA
